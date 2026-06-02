@@ -1,0 +1,14 @@
+enum Status {
+    PENDENTE
+    ANDAMENTO
+    CONCLUIDA
+}
+
+model Etapas{
+     nome String
+     prazo DateTime
+     status Status
+     aeronave_id String
+     @@id([nome,aeronave_id])
+     aeronave Aeronaves @relation(fields: [aeronave_id],references: [id])
+}

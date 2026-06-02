@@ -1,0 +1,18 @@
+enum TipoStatus {
+    EM_PRODUCAO
+    EM_TRANSPORTE
+    PRONTA
+}
+enum TipoPecas {
+     NACIONAL
+      IMPORTADA
+}
+model Pecas{
+   nome String 
+   tipo TipoPecas
+   fornecedor String
+   status TipoStatus
+   aeronave_id String
+   @@id([nome,aeronave_id])
+   aeronave Aeronaves @relation(fields: [aeronave_id],references: [id],onDelete: Cascade)
+}

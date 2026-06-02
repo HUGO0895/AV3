@@ -1,0 +1,16 @@
+enum Tipo {
+    ELETRICO
+    HIDRAULICO
+    AERODINAMICO
+}
+enum Resultado {
+    APROVADO
+    REPROVADO
+}
+model Testes{
+    tipo Tipo
+    resultado Resultado
+    aeronave_id String
+    @@id([tipo,aeronave_id])
+    aeronaves Aeronaves @relation(fields: [aeronave_id],references: [id])
+}

@@ -1,0 +1,14 @@
+enum tipoAero {
+   COMERCIAL
+   MILITAR
+}
+model Aeronaves{
+  id String @id 
+  modelo String 
+  capacidade Int
+  alcance Int
+  tipo tipoAero
+  pecas Pecas []
+  etapas Etapas[]
+  testes Testes[]
+}
