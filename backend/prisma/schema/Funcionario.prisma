@@ -7,9 +7,9 @@ enum Permissao {
 model Funcionario {
     id Int @id @default(autoincrement())
     nome String
-    telefone String 
+    telefone String @unique
     endereco String 
     usuario  String @unique 
     senha String 
-    nivelPermisssao Permissao
+    nivelPermissao Permissao
 }

@@ -38,12 +38,34 @@ export default class PecaController{
              })
         }
     }
-    static async delete(){
+    static async delete(req:Request,res:Response){
         try{
-           
-
+           const {id,nome}=req.params
+           const resposta= await this.PecaService.delete(id as string,nome as string)
+           return res.status(200).json({
+            status:"sucess",
+            resposta
+           })
         }catch(erro){
-
+           return res.status(400).json({
+            status:"error",
+             resposta:"Dados Inválidos"
+           })
         }
+    }
+    static async get(req:Request,res:Response){
+       try{
+          const {id}=req.params
+          const resposta= await this.PecaService.get(id as string)
+          return res.status(200).json({
+            status:"sucess",
+            resposta
+          })
+       }catch(erro){
+             return res.status(400).json({
+            status:"error",
+             resposta:"Dados Inválidos"
+           })
+       }
     }
 }

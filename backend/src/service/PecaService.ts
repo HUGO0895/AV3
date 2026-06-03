@@ -17,7 +17,7 @@ export default class PecaServ{
                 "PRONTA":["EM_PRODUCAO","EM_TRANSPORTE"]
             }
             if(informacoesInvalidas[pecaAntiga.status].includes(peca.status))
-                throw Error(`Não é possivel mudar o Status da Peca de ${pecaAntiga.status} para ${peca.status}`)
+                throw  new Error(`Não é possivel mudar o Status da Peca de ${pecaAntiga.status} para ${peca.status}`)
 
             return this.Pecarepo.update(peca)
          }
