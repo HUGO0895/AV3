@@ -4,12 +4,6 @@ import FormDeletarAero from './deletarAero';
 import FormEditarAero from './formUpdate';
 import FormCadastroAero from './formCdastro';
 
-const aeronavesMocadas = [
-    { id: 'AC-001', modelo: 'Boeing 737', tipo: 'COMERCIAL', alcance: 5000, capacidade: 180 },
-    { id: 'AC-002', modelo: 'KC-390', tipo: 'MILITAR', alcance: 2800, capacidade: 80 },
-    { id: 'AC-003', modelo: 'Airbus A320', tipo: 'COMERCIAL', alcance: 6100, capacidade: 150 },
-    { id: 'AC-004', modelo: 'F-35 Lightning II', tipo: 'MILITAR', alcance: 2200, capacidade: 1 },
-];
 
 function VerAeronaves() {
   
@@ -24,7 +18,7 @@ function VerAeronaves() {
     const [AeroParaEditar, setAeroParaEditar] = useState({ id: '', modelo: '', tipo: '', alcance: 0, capacidade: 0 });
 
     
-    const aeronavesFiltradas = aeronavesMocadas.filter((aero) => {
+    const aeronavesFiltradas = aeronaves.filter((aero) => {
         const bateNome = aero.modelo.toLowerCase().includes(busca.toLowerCase());
         const bateTipo = filtroTipo === 'TODOS' || aero.tipo === filtroTipo;
         return bateNome && bateTipo;

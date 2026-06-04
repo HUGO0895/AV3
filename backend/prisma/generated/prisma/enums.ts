@@ -63,7 +63,8 @@ export type Tipo = (typeof Tipo)[keyof typeof Tipo]
 
 export const Resultado = {
   APROVADO: 'APROVADO',
-  REPROVADO: 'REPROVADO'
+  REPROVADO: 'REPROVADO',
+  PENDENTE: 'PENDENTE'
 } as const
 
 export type Resultado = (typeof Resultado)[keyof typeof Resultado]

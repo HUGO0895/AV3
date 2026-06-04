@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Aeronaves: 'Aeronaves',
   Etapas: 'Etapas',
+  FuncEtapa: 'FuncEtapa',
   Funcionario: 'Funcionario',
   Pecas: 'Pecas',
   Testes: 'Testes'
@@ -95,6 +96,15 @@ export const EtapasScalarFieldEnum = {
 export type EtapasScalarFieldEnum = (typeof EtapasScalarFieldEnum)[keyof typeof EtapasScalarFieldEnum]
 
 
+export const FuncEtapaScalarFieldEnum = {
+  funcionario_id: 'funcionario_id',
+  etapa_nome: 'etapa_nome',
+  etapa_aeronave_id: 'etapa_aeronave_id'
+} as const
+
+export type FuncEtapaScalarFieldEnum = (typeof FuncEtapaScalarFieldEnum)[keyof typeof FuncEtapaScalarFieldEnum]
+
+
 export const FuncionarioScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
@@ -102,7 +112,7 @@ export const FuncionarioScalarFieldEnum = {
   endereco: 'endereco',
   usuario: 'usuario',
   senha: 'senha',
-  nivelPermisssao: 'nivelPermisssao'
+  nivelPermissao: 'nivelPermissao'
 } as const
 
 export type FuncionarioScalarFieldEnum = (typeof FuncionarioScalarFieldEnum)[keyof typeof FuncionarioScalarFieldEnum]
@@ -150,6 +160,14 @@ export const EtapasOrderByRelevanceFieldEnum = {
 } as const
 
 export type EtapasOrderByRelevanceFieldEnum = (typeof EtapasOrderByRelevanceFieldEnum)[keyof typeof EtapasOrderByRelevanceFieldEnum]
+
+
+export const FuncEtapaOrderByRelevanceFieldEnum = {
+  etapa_nome: 'etapa_nome',
+  etapa_aeronave_id: 'etapa_aeronave_id'
+} as const
+
+export type FuncEtapaOrderByRelevanceFieldEnum = (typeof FuncEtapaOrderByRelevanceFieldEnum)[keyof typeof FuncEtapaOrderByRelevanceFieldEnum]
 
 
 export const FuncionarioOrderByRelevanceFieldEnum = {

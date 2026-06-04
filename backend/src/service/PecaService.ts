@@ -13,8 +13,8 @@ export default class PecaServ{
             })
             const informacoesInvalidas={
                 "EM_PRODUCAO":["PRONTA"],
-                "EM_TRANSPORTE":["PRONTA","EM_PRODUCAO"],
-                "PRONTA":["EM_PRODUCAO","EM_TRANSPORTE"]
+                "EM_TRANSPORTE":["EM_PRODUCAO","EM_PRODUCAO"],
+                "PRONTA":["EM_PRODUCAO","EM_TRANSPORTE","PRONTA"]
             }
             if(informacoesInvalidas[pecaAntiga.status].includes(peca.status))
                 throw  new Error(`Não é possivel mudar o Status da Peca de ${pecaAntiga.status} para ${peca.status}`)

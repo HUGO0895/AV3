@@ -4,6 +4,7 @@ export interface createEtapa{
      nome:string,
      prazo:string,
      aeronave_id:string
+     funcionarios?:Array<number>
 }
 
 export interface updateEtapa{
@@ -11,6 +12,7 @@ export interface updateEtapa{
     prazo:string,
     status:Status
     aeronave_id:string
+    funcionarios?:Array<number>
 }
 
 export interface responseEtapa{
@@ -18,4 +20,5 @@ export interface responseEtapa{
     prazo:string,
     status:Status,
     aeronave_id:string
+    funcionarios?:Array<string>
 }

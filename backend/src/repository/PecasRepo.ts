@@ -56,6 +56,7 @@ export default class PecasRepo{
                   status:true
                   }
               })
+              return Peca
       }
       public async get(aeronave_id:string){
              const Pecas=await prisma.pecas.findMany({

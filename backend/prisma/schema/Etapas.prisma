@@ -6,9 +6,10 @@ enum Status {
 
 model Etapas{
      nome String
-     prazo DateTime
+     prazo DateTime @db.Date
      status Status
      aeronave_id String
      @@id([nome,aeronave_id])
+     funcionarios FuncEtapa[]
      aeronave Aeronaves @relation(fields: [aeronave_id],references: [id])
 }

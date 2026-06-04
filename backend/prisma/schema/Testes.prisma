@@ -6,6 +6,7 @@ enum Tipo {
 enum Resultado {
     APROVADO
     REPROVADO
+    PENDENTE
 }
 model Testes{
     tipo Tipo

@@ -28,6 +28,11 @@ export type Aeronaves = Prisma.AeronavesModel
  */
 export type Etapas = Prisma.EtapasModel
 /**
+ * Model FuncEtapa
+ * 
+ */
+export type FuncEtapa = Prisma.FuncEtapaModel
+/**
  * Model Funcionario
  * 
  */

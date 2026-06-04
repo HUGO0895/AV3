@@ -10,6 +10,7 @@
  */
 export type * from './models/Aeronaves'
 export type * from './models/Etapas'
+export type * from './models/FuncEtapa'
 export type * from './models/Funcionario'
 export type * from './models/Pecas'
 export type * from './models/Testes'

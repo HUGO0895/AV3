@@ -6,7 +6,7 @@ export default class TesteRepo{
          const Test= await prisma.testes.create({
             data:{
                 tipo:teste.tipo,
-                resultado:teste.resultado,
+                resultado:Resultado.PENDENTE,
                 aeronave_id:teste.aeronave_id
             },
             select:{
@@ -34,6 +34,7 @@ export default class TesteRepo{
                 aeronave_id:true
             }
         })
+        return Teste
     }
 
     public async delete(idAeronave:string,tipo:Tipo){

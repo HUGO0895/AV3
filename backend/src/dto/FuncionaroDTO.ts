@@ -19,6 +19,7 @@ export interface updateFuncionario{
 }
 
 export interface ResponseFuncionario{
+       id:number
      nome:string,
        telefone:string,
        endereco:string,

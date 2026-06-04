@@ -174,6 +174,7 @@ export type EtapasWhereInput = {
   prazo?: Prisma.DateTimeFilter<"Etapas"> | Date | string
   status?: Prisma.EnumStatusFilter<"Etapas"> | $Enums.Status
   aeronave_id?: Prisma.StringFilter<"Etapas"> | string
+  funcionarios?: Prisma.FuncEtapaListRelationFilter
   aeronave?: Prisma.XOR<Prisma.AeronavesScalarRelationFilter, Prisma.AeronavesWhereInput>
 }
 
@@ -182,6 +183,7 @@ export type EtapasOrderByWithRelationInput = {
   prazo?: Prisma.SortOrder
   status?: Prisma.SortOrder
   aeronave_id?: Prisma.SortOrder
+  funcionarios?: Prisma.FuncEtapaOrderByRelationAggregateInput
   aeronave?: Prisma.AeronavesOrderByWithRelationInput
   _relevance?: Prisma.EtapasOrderByRelevanceInput
 }
@@ -195,6 +197,7 @@ export type EtapasWhereUniqueInput = Prisma.AtLeast<{
   prazo?: Prisma.DateTimeFilter<"Etapas"> | Date | string
   status?: Prisma.EnumStatusFilter<"Etapas"> | $Enums.Status
   aeronave_id?: Prisma.StringFilter<"Etapas"> | string
+  funcionarios?: Prisma.FuncEtapaListRelationFilter
   aeronave?: Prisma.XOR<Prisma.AeronavesScalarRelationFilter, Prisma.AeronavesWhereInput>
 }, "nome_aeronave_id">
 
@@ -222,6 +225,7 @@ export type EtapasCreateInput = {
   nome: string
   prazo: Date | string
   status: $Enums.Status
+  funcionarios?: Prisma.FuncEtapaCreateNestedManyWithoutEtapaInput
   aeronave: Prisma.AeronavesCreateNestedOneWithoutEtapasInput
 }
 
@@ -230,12 +234,14 @@ export type EtapasUncheckedCreateInput = {
   prazo: Date | string
   status: $Enums.Status
   aeronave_id: string
+  funcionarios?: Prisma.FuncEtapaUncheckedCreateNestedManyWithoutEtapaInput
 }
 
 export type EtapasUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   prazo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  funcionarios?: Prisma.FuncEtapaUpdateManyWithoutEtapaNestedInput
   aeronave?: Prisma.AeronavesUpdateOneRequiredWithoutEtapasNestedInput
 }
 
@@ -244,6 +250,7 @@ export type EtapasUncheckedUpdateInput = {
   prazo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   aeronave_id?: Prisma.StringFieldUpdateOperationsInput | string
+  funcionarios?: Prisma.FuncEtapaUncheckedUpdateManyWithoutEtapaNestedInput
 }
 
 export type EtapasCreateManyInput = {
@@ -308,6 +315,11 @@ export type EtapasMinOrderByAggregateInput = {
   aeronave_id?: Prisma.SortOrder
 }
 
+export type EtapasScalarRelationFilter = {
+  is?: Prisma.EtapasWhereInput
+  isNot?: Prisma.EtapasWhereInput
+}
+
 export type EtapasCreateNestedManyWithoutAeronaveInput = {
   create?: Prisma.XOR<Prisma.EtapasCreateWithoutAeronaveInput, Prisma.EtapasUncheckedCreateWithoutAeronaveInput> | Prisma.EtapasCreateWithoutAeronaveInput[] | Prisma.EtapasUncheckedCreateWithoutAeronaveInput[]
   connectOrCreate?: Prisma.EtapasCreateOrConnectWithoutAeronaveInput | Prisma.EtapasCreateOrConnectWithoutAeronaveInput[]
@@ -358,16 +370,32 @@ export type EnumStatusFieldUpdateOperationsInput = {
   set?: $Enums.Status
 }
 
+export type EtapasCreateNestedOneWithoutFuncionariosInput = {
+  create?: Prisma.XOR<Prisma.EtapasCreateWithoutFuncionariosInput, Prisma.EtapasUncheckedCreateWithoutFuncionariosInput>
+  connectOrCreate?: Prisma.EtapasCreateOrConnectWithoutFuncionariosInput
+  connect?: Prisma.EtapasWhereUniqueInput
+}
+
+export type EtapasUpdateOneRequiredWithoutFuncionariosNestedInput = {
+  create?: Prisma.XOR<Prisma.EtapasCreateWithoutFuncionariosInput, Prisma.EtapasUncheckedCreateWithoutFuncionariosInput>
+  connectOrCreate?: Prisma.EtapasCreateOrConnectWithoutFuncionariosInput
+  upsert?: Prisma.EtapasUpsertWithoutFuncionariosInput
+  connect?: Prisma.EtapasWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EtapasUpdateToOneWithWhereWithoutFuncionariosInput, Prisma.EtapasUpdateWithoutFuncionariosInput>, Prisma.EtapasUncheckedUpdateWithoutFuncionariosInput>
+}
+
 export type EtapasCreateWithoutAeronaveInput = {
   nome: string
   prazo: Date | string
   status: $Enums.Status
+  funcionarios?: Prisma.FuncEtapaCreateNestedManyWithoutEtapaInput
 }
 
 export type EtapasUncheckedCreateWithoutAeronaveInput = {
   nome: string
   prazo: Date | string
   status: $Enums.Status
+  funcionarios?: Prisma.FuncEtapaUncheckedCreateNestedManyWithoutEtapaInput
 }
 
 export type EtapasCreateOrConnectWithoutAeronaveInput = {
@@ -406,6 +434,50 @@ export type EtapasScalarWhereInput = {
   aeronave_id?: Prisma.StringFilter<"Etapas"> | string
 }
 
+export type EtapasCreateWithoutFuncionariosInput = {
+  nome: string
+  prazo: Date | string
+  status: $Enums.Status
+  aeronave: Prisma.AeronavesCreateNestedOneWithoutEtapasInput
+}
+
+export type EtapasUncheckedCreateWithoutFuncionariosInput = {
+  nome: string
+  prazo: Date | string
+  status: $Enums.Status
+  aeronave_id: string
+}
+
+export type EtapasCreateOrConnectWithoutFuncionariosInput = {
+  where: Prisma.EtapasWhereUniqueInput
+  create: Prisma.XOR<Prisma.EtapasCreateWithoutFuncionariosInput, Prisma.EtapasUncheckedCreateWithoutFuncionariosInput>
+}
+
+export type EtapasUpsertWithoutFuncionariosInput = {
+  update: Prisma.XOR<Prisma.EtapasUpdateWithoutFuncionariosInput, Prisma.EtapasUncheckedUpdateWithoutFuncionariosInput>
+  create: Prisma.XOR<Prisma.EtapasCreateWithoutFuncionariosInput, Prisma.EtapasUncheckedCreateWithoutFuncionariosInput>
+  where?: Prisma.EtapasWhereInput
+}
+
+export type EtapasUpdateToOneWithWhereWithoutFuncionariosInput = {
+  where?: Prisma.EtapasWhereInput
+  data: Prisma.XOR<Prisma.EtapasUpdateWithoutFuncionariosInput, Prisma.EtapasUncheckedUpdateWithoutFuncionariosInput>
+}
+
+export type EtapasUpdateWithoutFuncionariosInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  prazo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  aeronave?: Prisma.AeronavesUpdateOneRequiredWithoutEtapasNestedInput
+}
+
+export type EtapasUncheckedUpdateWithoutFuncionariosInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  prazo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  aeronave_id?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type EtapasCreateManyAeronaveInput = {
   nome: string
   prazo: Date | string
@@ -416,12 +488,14 @@ export type EtapasUpdateWithoutAeronaveInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   prazo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  funcionarios?: Prisma.FuncEtapaUpdateManyWithoutEtapaNestedInput
 }
 
 export type EtapasUncheckedUpdateWithoutAeronaveInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   prazo?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  funcionarios?: Prisma.FuncEtapaUncheckedUpdateManyWithoutEtapaNestedInput
 }
 
 export type EtapasUncheckedUpdateManyWithoutAeronaveInput = {
@@ -431,13 +505,44 @@ export type EtapasUncheckedUpdateManyWithoutAeronaveInput = {
 }
 
 
+/**
+ * Count Type EtapasCountOutputType
+ */
+
+export type EtapasCountOutputType = {
+  funcionarios: number
+}
+
+export type EtapasCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  funcionarios?: boolean | EtapasCountOutputTypeCountFuncionariosArgs
+}
+
+/**
+ * EtapasCountOutputType without action
+ */
+export type EtapasCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EtapasCountOutputType
+   */
+  select?: Prisma.EtapasCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EtapasCountOutputType without action
+ */
+export type EtapasCountOutputTypeCountFuncionariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FuncEtapaWhereInput
+}
+
 
 export type EtapasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   nome?: boolean
   prazo?: boolean
   status?: boolean
   aeronave_id?: boolean
+  funcionarios?: boolean | Prisma.Etapas$funcionariosArgs<ExtArgs>
   aeronave?: boolean | Prisma.AeronavesDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.EtapasCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["etapas"]>
 
 
@@ -451,12 +556,15 @@ export type EtapasSelectScalar = {
 
 export type EtapasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"nome" | "prazo" | "status" | "aeronave_id", ExtArgs["result"]["etapas"]>
 export type EtapasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  funcionarios?: boolean | Prisma.Etapas$funcionariosArgs<ExtArgs>
   aeronave?: boolean | Prisma.AeronavesDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.EtapasCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $EtapasPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Etapas"
   objects: {
+    funcionarios: Prisma.$FuncEtapaPayload<ExtArgs>[]
     aeronave: Prisma.$AeronavesPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -804,6 +912,7 @@ readonly fields: EtapasFieldRefs;
  */
 export interface Prisma__EtapasClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  funcionarios<T extends Prisma.Etapas$funcionariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Etapas$funcionariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FuncEtapaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   aeronave<T extends Prisma.AeronavesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AeronavesDefaultArgs<ExtArgs>>): Prisma.Prisma__AeronavesClient<runtime.Types.Result.GetResult<Prisma.$AeronavesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1183,6 +1292,30 @@ export type EtapasDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Etapas to delete.
    */
   limit?: number
+}
+
+/**
+ * Etapas.funcionarios
+ */
+export type Etapas$funcionariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FuncEtapa
+   */
+  select?: Prisma.FuncEtapaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FuncEtapa
+   */
+  omit?: Prisma.FuncEtapaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncEtapaInclude<ExtArgs> | null
+  where?: Prisma.FuncEtapaWhereInput
+  orderBy?: Prisma.FuncEtapaOrderByWithRelationInput | Prisma.FuncEtapaOrderByWithRelationInput[]
+  cursor?: Prisma.FuncEtapaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FuncEtapaScalarFieldEnum | Prisma.FuncEtapaScalarFieldEnum[]
 }
 
 /**

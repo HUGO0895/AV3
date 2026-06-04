@@ -19,11 +19,11 @@ export default class EtapaControler{
     }catch(erro){
         return res.status(400).json({
             status:"error",
-            resposta:"Não foi possivel criar uma Etapa"
+            resposta:erro
         })
     }
     }
-    public async update(req:Request,res:Response){
+    static async update(req:Request,res:Response){
           try{
             const etapa:updateEtapa=req.body
             const resposta= await EtapaControler.EtapaServ.update(etapa)
@@ -33,14 +33,20 @@ export default class EtapaControler{
             })
             
           }catch(erro){
+            if(erro instanceof Error)
               return res.status(400).json({
             status:"error",
-            resposta:erro
+            resposta:erro.message
         })
-          }
-    }
 
-    public async delete(req:Request,res:Response){
+         return res.status(400).json({
+            status:"error",
+            resposta:"Não foi possivel atualizar os dados dessa Etapa"
+            
+          })
+    }}
+
+    static async delete(req:Request,res:Response){
             try{
                 const {id,nome}=req.params
                 const resposta=await EtapaControler.EtapaServ.delete(id as string,nome as string)
@@ -56,7 +62,7 @@ export default class EtapaControler{
             }
     }
     
-    public async get(req:Request,res:Response){
+    static async get(req:Request,res:Response){
          try{
              const {id}=req.params
              const resposta=await EtapaControler.EtapaServ.get(id as string)

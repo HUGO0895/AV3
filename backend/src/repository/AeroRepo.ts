@@ -28,7 +28,7 @@ export default class AeroRepo{
             data:{
               modelo:aeronave.modelo,
               capacidade:aeronave.capacidade,
-              alcance:aeronave.capacidade,
+              alcance:aeronave.alcance,
               tipo:aeronave.tipo
             },
              select:{

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Testes` MODIFY `resultado` ENUM('APROVADO', 'REPROVADO', 'PENDENTE') NOT NULL;

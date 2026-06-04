@@ -18,7 +18,7 @@ export default class TesteController{
              })
             }catch(erro){
                   return res.status(400).json({
-                status:"sucess",
+                status:"error",
                 resposta:"Não foi possivel criar esse Teste"
              })
             }
@@ -34,7 +34,7 @@ export default class TesteController{
              })
             }catch(erro){
                    return res.status(400).json({
-                status:"sucess",
+                status:"error",
                 resposta:erro
              })
              }
@@ -43,7 +43,7 @@ export default class TesteController{
        static async delete(req:Request,res:Response){
         try{
             const {id,nome}=req.params 
-            if(nome as string in Tipo)
+            if(!(nome as string  in Tipo))
                 return res.status(400).json({
                  status:"error",
                  resposta:"Tipo de Teste equivocado"
@@ -74,7 +74,7 @@ export default class TesteController{
          }catch(erro){
              return res.status(400).json({
                 status:"error",
-                resposta:"Não foi possivel achar Teste dessa Aeronave"
+                resposta:"Não foi possivel achar Testes dessa Aeronave"
              })
          }
        }

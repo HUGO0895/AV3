@@ -1,0 +1,8 @@
+model FuncEtapa{
+    funcionario_id Int 
+    etapa_nome String
+    etapa_aeronave_id String
+    funcionario Funcionario @relation(fields: [funcionario_id], references: [id],onDelete: Cascade)
+    etapa       Etapas      @relation(fields: [etapa_nome, etapa_aeronave_id], references: [nome, aeronave_id],onDelete: Cascade)
+    @@id([funcionario_id, etapa_nome, etapa_aeronave_id])
+}

@@ -9,13 +9,13 @@ export default class EtapaService{
         }
 
         public async update(etapa:updateEtapa){
-            const etapaAntiga=await prisma.pecas.findUnique({
+            const etapaAntiga=await prisma.etapas.findUnique({
                 where:{nome_aeronave_id:{nome:etapa.nome,aeronave_id:etapa.aeronave_id}}
             })
            const informaçoesInvalidas={
                 "PENDENTE":["CONCLUIDA"],
                 "ANDAMENTO":["ANDAMENTO","PENDENTE"],
-                "CONCLUIDA":["ANDAMENTO","PENDENTE"]
+                "CONCLUIDA":["ANDAMENTO","PENDENTE","CONCLUIDA"]
             }
             if(informaçoesInvalidas[etapaAntiga.status].includes(etapa.status))
                  throw new Error(`Não é possivel mudar o status de ${etapaAntiga.status} para ${etapa.status}`)

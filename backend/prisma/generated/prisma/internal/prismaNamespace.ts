@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Aeronaves: 'Aeronaves',
   Etapas: 'Etapas',
+  FuncEtapa: 'FuncEtapa',
   Funcionario: 'Funcionario',
   Pecas: 'Pecas',
   Testes: 'Testes'
@@ -404,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "aeronaves" | "etapas" | "funcionario" | "pecas" | "testes"
+    modelProps: "aeronaves" | "etapas" | "funcEtapa" | "funcionario" | "pecas" | "testes"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -537,6 +538,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.EtapasCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EtapasCountAggregateOutputType> | number
+        }
+      }
+    }
+    FuncEtapa: {
+      payload: Prisma.$FuncEtapaPayload<ExtArgs>
+      fields: Prisma.FuncEtapaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FuncEtapaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FuncEtapaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>
+        }
+        findFirst: {
+          args: Prisma.FuncEtapaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FuncEtapaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>
+        }
+        findMany: {
+          args: Prisma.FuncEtapaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>[]
+        }
+        create: {
+          args: Prisma.FuncEtapaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>
+        }
+        createMany: {
+          args: Prisma.FuncEtapaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.FuncEtapaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>
+        }
+        update: {
+          args: Prisma.FuncEtapaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>
+        }
+        deleteMany: {
+          args: Prisma.FuncEtapaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FuncEtapaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.FuncEtapaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FuncEtapaPayload>
+        }
+        aggregate: {
+          args: Prisma.FuncEtapaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFuncEtapa>
+        }
+        groupBy: {
+          args: Prisma.FuncEtapaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FuncEtapaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FuncEtapaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FuncEtapaCountAggregateOutputType> | number
         }
       }
     }
@@ -798,6 +865,15 @@ export const EtapasScalarFieldEnum = {
 export type EtapasScalarFieldEnum = (typeof EtapasScalarFieldEnum)[keyof typeof EtapasScalarFieldEnum]
 
 
+export const FuncEtapaScalarFieldEnum = {
+  funcionario_id: 'funcionario_id',
+  etapa_nome: 'etapa_nome',
+  etapa_aeronave_id: 'etapa_aeronave_id'
+} as const
+
+export type FuncEtapaScalarFieldEnum = (typeof FuncEtapaScalarFieldEnum)[keyof typeof FuncEtapaScalarFieldEnum]
+
+
 export const FuncionarioScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
@@ -805,7 +881,7 @@ export const FuncionarioScalarFieldEnum = {
   endereco: 'endereco',
   usuario: 'usuario',
   senha: 'senha',
-  nivelPermisssao: 'nivelPermisssao'
+  nivelPermissao: 'nivelPermissao'
 } as const
 
 export type FuncionarioScalarFieldEnum = (typeof FuncionarioScalarFieldEnum)[keyof typeof FuncionarioScalarFieldEnum]
@@ -853,6 +929,14 @@ export const EtapasOrderByRelevanceFieldEnum = {
 } as const
 
 export type EtapasOrderByRelevanceFieldEnum = (typeof EtapasOrderByRelevanceFieldEnum)[keyof typeof EtapasOrderByRelevanceFieldEnum]
+
+
+export const FuncEtapaOrderByRelevanceFieldEnum = {
+  etapa_nome: 'etapa_nome',
+  etapa_aeronave_id: 'etapa_aeronave_id'
+} as const
+
+export type FuncEtapaOrderByRelevanceFieldEnum = (typeof FuncEtapaOrderByRelevanceFieldEnum)[keyof typeof FuncEtapaOrderByRelevanceFieldEnum]
 
 
 export const FuncionarioOrderByRelevanceFieldEnum = {
@@ -1076,6 +1160,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   aeronaves?: Prisma.AeronavesOmit
   etapas?: Prisma.EtapasOmit
+  funcEtapa?: Prisma.FuncEtapaOmit
   funcionario?: Prisma.FuncionarioOmit
   pecas?: Prisma.PecasOmit
   testes?: Prisma.TestesOmit

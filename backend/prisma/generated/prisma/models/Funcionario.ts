@@ -41,7 +41,7 @@ export type FuncionarioMinAggregateOutputType = {
   endereco: string | null
   usuario: string | null
   senha: string | null
-  nivelPermisssao: $Enums.Permissao | null
+  nivelPermissao: $Enums.Permissao | null
 }
 
 export type FuncionarioMaxAggregateOutputType = {
@@ -51,7 +51,7 @@ export type FuncionarioMaxAggregateOutputType = {
   endereco: string | null
   usuario: string | null
   senha: string | null
-  nivelPermisssao: $Enums.Permissao | null
+  nivelPermissao: $Enums.Permissao | null
 }
 
 export type FuncionarioCountAggregateOutputType = {
@@ -61,7 +61,7 @@ export type FuncionarioCountAggregateOutputType = {
   endereco: number
   usuario: number
   senha: number
-  nivelPermisssao: number
+  nivelPermissao: number
   _all: number
 }
 
@@ -81,7 +81,7 @@ export type FuncionarioMinAggregateInputType = {
   endereco?: true
   usuario?: true
   senha?: true
-  nivelPermisssao?: true
+  nivelPermissao?: true
 }
 
 export type FuncionarioMaxAggregateInputType = {
@@ -91,7 +91,7 @@ export type FuncionarioMaxAggregateInputType = {
   endereco?: true
   usuario?: true
   senha?: true
-  nivelPermisssao?: true
+  nivelPermissao?: true
 }
 
 export type FuncionarioCountAggregateInputType = {
@@ -101,7 +101,7 @@ export type FuncionarioCountAggregateInputType = {
   endereco?: true
   usuario?: true
   senha?: true
-  nivelPermisssao?: true
+  nivelPermissao?: true
   _all?: true
 }
 
@@ -198,7 +198,7 @@ export type FuncionarioGroupByOutputType = {
   endereco: string
   usuario: string
   senha: string
-  nivelPermisssao: $Enums.Permissao
+  nivelPermissao: $Enums.Permissao
   _count: FuncionarioCountAggregateOutputType | null
   _avg: FuncionarioAvgAggregateOutputType | null
   _sum: FuncionarioSumAggregateOutputType | null
@@ -231,7 +231,8 @@ export type FuncionarioWhereInput = {
   endereco?: Prisma.StringFilter<"Funcionario"> | string
   usuario?: Prisma.StringFilter<"Funcionario"> | string
   senha?: Prisma.StringFilter<"Funcionario"> | string
-  nivelPermisssao?: Prisma.EnumPermissaoFilter<"Funcionario"> | $Enums.Permissao
+  nivelPermissao?: Prisma.EnumPermissaoFilter<"Funcionario"> | $Enums.Permissao
+  etapas?: Prisma.FuncEtapaListRelationFilter
 }
 
 export type FuncionarioOrderByWithRelationInput = {
@@ -241,22 +242,24 @@ export type FuncionarioOrderByWithRelationInput = {
   endereco?: Prisma.SortOrder
   usuario?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  nivelPermisssao?: Prisma.SortOrder
+  nivelPermissao?: Prisma.SortOrder
+  etapas?: Prisma.FuncEtapaOrderByRelationAggregateInput
   _relevance?: Prisma.FuncionarioOrderByRelevanceInput
 }
 
 export type FuncionarioWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  telefone?: string
   usuario?: string
   AND?: Prisma.FuncionarioWhereInput | Prisma.FuncionarioWhereInput[]
   OR?: Prisma.FuncionarioWhereInput[]
   NOT?: Prisma.FuncionarioWhereInput | Prisma.FuncionarioWhereInput[]
   nome?: Prisma.StringFilter<"Funcionario"> | string
-  telefone?: Prisma.StringFilter<"Funcionario"> | string
   endereco?: Prisma.StringFilter<"Funcionario"> | string
   senha?: Prisma.StringFilter<"Funcionario"> | string
-  nivelPermisssao?: Prisma.EnumPermissaoFilter<"Funcionario"> | $Enums.Permissao
-}, "id" | "usuario">
+  nivelPermissao?: Prisma.EnumPermissaoFilter<"Funcionario"> | $Enums.Permissao
+  etapas?: Prisma.FuncEtapaListRelationFilter
+}, "id" | "telefone" | "usuario">
 
 export type FuncionarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -265,7 +268,7 @@ export type FuncionarioOrderByWithAggregationInput = {
   endereco?: Prisma.SortOrder
   usuario?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  nivelPermisssao?: Prisma.SortOrder
+  nivelPermissao?: Prisma.SortOrder
   _count?: Prisma.FuncionarioCountOrderByAggregateInput
   _avg?: Prisma.FuncionarioAvgOrderByAggregateInput
   _max?: Prisma.FuncionarioMaxOrderByAggregateInput
@@ -283,7 +286,7 @@ export type FuncionarioScalarWhereWithAggregatesInput = {
   endereco?: Prisma.StringWithAggregatesFilter<"Funcionario"> | string
   usuario?: Prisma.StringWithAggregatesFilter<"Funcionario"> | string
   senha?: Prisma.StringWithAggregatesFilter<"Funcionario"> | string
-  nivelPermisssao?: Prisma.EnumPermissaoWithAggregatesFilter<"Funcionario"> | $Enums.Permissao
+  nivelPermissao?: Prisma.EnumPermissaoWithAggregatesFilter<"Funcionario"> | $Enums.Permissao
 }
 
 export type FuncionarioCreateInput = {
@@ -292,7 +295,8 @@ export type FuncionarioCreateInput = {
   endereco: string
   usuario: string
   senha: string
-  nivelPermisssao: $Enums.Permissao
+  nivelPermissao: $Enums.Permissao
+  etapas?: Prisma.FuncEtapaCreateNestedManyWithoutFuncionarioInput
 }
 
 export type FuncionarioUncheckedCreateInput = {
@@ -302,7 +306,8 @@ export type FuncionarioUncheckedCreateInput = {
   endereco: string
   usuario: string
   senha: string
-  nivelPermisssao: $Enums.Permissao
+  nivelPermissao: $Enums.Permissao
+  etapas?: Prisma.FuncEtapaUncheckedCreateNestedManyWithoutFuncionarioInput
 }
 
 export type FuncionarioUpdateInput = {
@@ -311,7 +316,8 @@ export type FuncionarioUpdateInput = {
   endereco?: Prisma.StringFieldUpdateOperationsInput | string
   usuario?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  nivelPermisssao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+  nivelPermissao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+  etapas?: Prisma.FuncEtapaUpdateManyWithoutFuncionarioNestedInput
 }
 
 export type FuncionarioUncheckedUpdateInput = {
@@ -321,7 +327,8 @@ export type FuncionarioUncheckedUpdateInput = {
   endereco?: Prisma.StringFieldUpdateOperationsInput | string
   usuario?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  nivelPermisssao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+  nivelPermissao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+  etapas?: Prisma.FuncEtapaUncheckedUpdateManyWithoutFuncionarioNestedInput
 }
 
 export type FuncionarioCreateManyInput = {
@@ -331,7 +338,7 @@ export type FuncionarioCreateManyInput = {
   endereco: string
   usuario: string
   senha: string
-  nivelPermisssao: $Enums.Permissao
+  nivelPermissao: $Enums.Permissao
 }
 
 export type FuncionarioUpdateManyMutationInput = {
@@ -340,7 +347,7 @@ export type FuncionarioUpdateManyMutationInput = {
   endereco?: Prisma.StringFieldUpdateOperationsInput | string
   usuario?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  nivelPermisssao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+  nivelPermissao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
 }
 
 export type FuncionarioUncheckedUpdateManyInput = {
@@ -350,7 +357,12 @@ export type FuncionarioUncheckedUpdateManyInput = {
   endereco?: Prisma.StringFieldUpdateOperationsInput | string
   usuario?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
-  nivelPermisssao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+  nivelPermissao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+}
+
+export type FuncionarioScalarRelationFilter = {
+  is?: Prisma.FuncionarioWhereInput
+  isNot?: Prisma.FuncionarioWhereInput
 }
 
 export type FuncionarioOrderByRelevanceInput = {
@@ -366,7 +378,7 @@ export type FuncionarioCountOrderByAggregateInput = {
   endereco?: Prisma.SortOrder
   usuario?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  nivelPermisssao?: Prisma.SortOrder
+  nivelPermissao?: Prisma.SortOrder
 }
 
 export type FuncionarioAvgOrderByAggregateInput = {
@@ -380,7 +392,7 @@ export type FuncionarioMaxOrderByAggregateInput = {
   endereco?: Prisma.SortOrder
   usuario?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  nivelPermisssao?: Prisma.SortOrder
+  nivelPermissao?: Prisma.SortOrder
 }
 
 export type FuncionarioMinOrderByAggregateInput = {
@@ -390,17 +402,114 @@ export type FuncionarioMinOrderByAggregateInput = {
   endereco?: Prisma.SortOrder
   usuario?: Prisma.SortOrder
   senha?: Prisma.SortOrder
-  nivelPermisssao?: Prisma.SortOrder
+  nivelPermissao?: Prisma.SortOrder
 }
 
 export type FuncionarioSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type FuncionarioCreateNestedOneWithoutEtapasInput = {
+  create?: Prisma.XOR<Prisma.FuncionarioCreateWithoutEtapasInput, Prisma.FuncionarioUncheckedCreateWithoutEtapasInput>
+  connectOrCreate?: Prisma.FuncionarioCreateOrConnectWithoutEtapasInput
+  connect?: Prisma.FuncionarioWhereUniqueInput
+}
+
+export type FuncionarioUpdateOneRequiredWithoutEtapasNestedInput = {
+  create?: Prisma.XOR<Prisma.FuncionarioCreateWithoutEtapasInput, Prisma.FuncionarioUncheckedCreateWithoutEtapasInput>
+  connectOrCreate?: Prisma.FuncionarioCreateOrConnectWithoutEtapasInput
+  upsert?: Prisma.FuncionarioUpsertWithoutEtapasInput
+  connect?: Prisma.FuncionarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FuncionarioUpdateToOneWithWhereWithoutEtapasInput, Prisma.FuncionarioUpdateWithoutEtapasInput>, Prisma.FuncionarioUncheckedUpdateWithoutEtapasInput>
+}
+
 export type EnumPermissaoFieldUpdateOperationsInput = {
   set?: $Enums.Permissao
 }
 
+export type FuncionarioCreateWithoutEtapasInput = {
+  nome: string
+  telefone: string
+  endereco: string
+  usuario: string
+  senha: string
+  nivelPermissao: $Enums.Permissao
+}
+
+export type FuncionarioUncheckedCreateWithoutEtapasInput = {
+  id?: number
+  nome: string
+  telefone: string
+  endereco: string
+  usuario: string
+  senha: string
+  nivelPermissao: $Enums.Permissao
+}
+
+export type FuncionarioCreateOrConnectWithoutEtapasInput = {
+  where: Prisma.FuncionarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.FuncionarioCreateWithoutEtapasInput, Prisma.FuncionarioUncheckedCreateWithoutEtapasInput>
+}
+
+export type FuncionarioUpsertWithoutEtapasInput = {
+  update: Prisma.XOR<Prisma.FuncionarioUpdateWithoutEtapasInput, Prisma.FuncionarioUncheckedUpdateWithoutEtapasInput>
+  create: Prisma.XOR<Prisma.FuncionarioCreateWithoutEtapasInput, Prisma.FuncionarioUncheckedCreateWithoutEtapasInput>
+  where?: Prisma.FuncionarioWhereInput
+}
+
+export type FuncionarioUpdateToOneWithWhereWithoutEtapasInput = {
+  where?: Prisma.FuncionarioWhereInput
+  data: Prisma.XOR<Prisma.FuncionarioUpdateWithoutEtapasInput, Prisma.FuncionarioUncheckedUpdateWithoutEtapasInput>
+}
+
+export type FuncionarioUpdateWithoutEtapasInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  usuario?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  nivelPermissao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+}
+
+export type FuncionarioUncheckedUpdateWithoutEtapasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.StringFieldUpdateOperationsInput | string
+  endereco?: Prisma.StringFieldUpdateOperationsInput | string
+  usuario?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  nivelPermissao?: Prisma.EnumPermissaoFieldUpdateOperationsInput | $Enums.Permissao
+}
+
+
+/**
+ * Count Type FuncionarioCountOutputType
+ */
+
+export type FuncionarioCountOutputType = {
+  etapas: number
+}
+
+export type FuncionarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  etapas?: boolean | FuncionarioCountOutputTypeCountEtapasArgs
+}
+
+/**
+ * FuncionarioCountOutputType without action
+ */
+export type FuncionarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FuncionarioCountOutputType
+   */
+  select?: Prisma.FuncionarioCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FuncionarioCountOutputType without action
+ */
+export type FuncionarioCountOutputTypeCountEtapasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FuncEtapaWhereInput
+}
 
 
 export type FuncionarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -410,7 +519,9 @@ export type FuncionarioSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   endereco?: boolean
   usuario?: boolean
   senha?: boolean
-  nivelPermisssao?: boolean
+  nivelPermissao?: boolean
+  etapas?: boolean | Prisma.Funcionario$etapasArgs<ExtArgs>
+  _count?: boolean | Prisma.FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["funcionario"]>
 
 
@@ -422,14 +533,20 @@ export type FuncionarioSelectScalar = {
   endereco?: boolean
   usuario?: boolean
   senha?: boolean
-  nivelPermisssao?: boolean
+  nivelPermissao?: boolean
 }
 
-export type FuncionarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "telefone" | "endereco" | "usuario" | "senha" | "nivelPermisssao", ExtArgs["result"]["funcionario"]>
+export type FuncionarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "telefone" | "endereco" | "usuario" | "senha" | "nivelPermissao", ExtArgs["result"]["funcionario"]>
+export type FuncionarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  etapas?: boolean | Prisma.Funcionario$etapasArgs<ExtArgs>
+  _count?: boolean | Prisma.FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
+}
 
 export type $FuncionarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Funcionario"
-  objects: {}
+  objects: {
+    etapas: Prisma.$FuncEtapaPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nome: string
@@ -437,7 +554,7 @@ export type $FuncionarioPayload<ExtArgs extends runtime.Types.Extensions.Interna
     endereco: string
     usuario: string
     senha: string
-    nivelPermisssao: $Enums.Permissao
+    nivelPermissao: $Enums.Permissao
   }, ExtArgs["result"]["funcionario"]>
   composites: {}
 }
@@ -778,6 +895,7 @@ readonly fields: FuncionarioFieldRefs;
  */
 export interface Prisma__FuncionarioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  etapas<T extends Prisma.Funcionario$etapasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Funcionario$etapasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FuncEtapaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -813,7 +931,7 @@ export interface FuncionarioFieldRefs {
   readonly endereco: Prisma.FieldRef<"Funcionario", 'String'>
   readonly usuario: Prisma.FieldRef<"Funcionario", 'String'>
   readonly senha: Prisma.FieldRef<"Funcionario", 'String'>
-  readonly nivelPermisssao: Prisma.FieldRef<"Funcionario", 'Permissao'>
+  readonly nivelPermissao: Prisma.FieldRef<"Funcionario", 'Permissao'>
 }
     
 
@@ -830,6 +948,10 @@ export type FuncionarioFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the Funcionario
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
   /**
    * Filter, which Funcionario to fetch.
    */
@@ -849,6 +971,10 @@ export type FuncionarioFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
+  /**
    * Filter, which Funcionario to fetch.
    */
   where: Prisma.FuncionarioWhereUniqueInput
@@ -866,6 +992,10 @@ export type FuncionarioFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the Funcionario
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
   /**
    * Filter, which Funcionario to fetch.
    */
@@ -915,6 +1045,10 @@ export type FuncionarioFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
+  /**
    * Filter, which Funcionario to fetch.
    */
   where?: Prisma.FuncionarioWhereInput
@@ -962,6 +1096,10 @@ export type FuncionarioFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Funcionario
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
   /**
    * Filter, which Funcionarios to fetch.
    */
@@ -1011,6 +1149,10 @@ export type FuncionarioCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
+  /**
    * The data needed to create a Funcionario.
    */
   data: Prisma.XOR<Prisma.FuncionarioCreateInput, Prisma.FuncionarioUncheckedCreateInput>
@@ -1039,6 +1181,10 @@ export type FuncionarioUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Funcionario
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
   /**
    * The data needed to update a Funcionario.
    */
@@ -1080,6 +1226,10 @@ export type FuncionarioUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
+  /**
    * The filter to search for the Funcionario to update in case it exists.
    */
   where: Prisma.FuncionarioWhereUniqueInput
@@ -1106,6 +1256,10 @@ export type FuncionarioDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
+  /**
    * Filter which Funcionario to delete.
    */
   where: Prisma.FuncionarioWhereUniqueInput
@@ -1126,6 +1280,30 @@ export type FuncionarioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Funcionario.etapas
+ */
+export type Funcionario$etapasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FuncEtapa
+   */
+  select?: Prisma.FuncEtapaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FuncEtapa
+   */
+  omit?: Prisma.FuncEtapaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncEtapaInclude<ExtArgs> | null
+  where?: Prisma.FuncEtapaWhereInput
+  orderBy?: Prisma.FuncEtapaOrderByWithRelationInput | Prisma.FuncEtapaOrderByWithRelationInput[]
+  cursor?: Prisma.FuncEtapaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FuncEtapaScalarFieldEnum | Prisma.FuncEtapaScalarFieldEnum[]
+}
+
+/**
  * Funcionario without action
  */
 export type FuncionarioDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1137,4 +1315,8 @@ export type FuncionarioDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Funcionario
    */
   omit?: Prisma.FuncionarioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FuncionarioInclude<ExtArgs> | null
 }

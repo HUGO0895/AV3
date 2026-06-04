@@ -11,5 +11,6 @@ model Funcionario {
     endereco String 
     usuario  String @unique 
     senha String 
+    etapas FuncEtapa[]
     nivelPermissao Permissao
 }
