@@ -1,16 +1,25 @@
-import Peca from "./pecas";
-enum tipoAero {
-    militar="militar",
-    comercial='comercial'
+import { tipoAero } from "../../prisma/generated/prisma/enums"
+
+export interface createAero {
+    id:string
+    modelo:string
+    capacidade:number
+    alcance:number
+    tipo:tipoAero
 }
 
-export default interface Aeronave {
-    id:string,
-    modelo:string,
-    capacidade:number,
-    alcance:number,
-    tipo: tipoAero;
-    pecas:Array<Peca>
-    etapas:Array<Etapa>
+export interface updateAero{
+    id:string
+    modelo:string
+    capacidade:number
+    alcance:number
+    tipo:tipoAero
+}
 
+export interface ResponseAero{
+    id:string
+    modelo:string
+    capacidade:string
+    alcance:number
+    tipo:tipoAero
 }

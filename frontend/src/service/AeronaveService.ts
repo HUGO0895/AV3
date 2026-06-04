@@ -1,11 +1,11 @@
-export default class Aeronaves{
-    private url:string
-    constructor(url:string){
-        this.url=url
+import { createAero, updateAero } from "../types/aeronave";
+import Service from "./Service";
+
+class AeronaveService extends Service<createAero,updateAero,string>{
+    constructor(){
+        super("http://localhost:3000/aeronaves")
     }
-    public async get(){
-        const resposta= await fetch(this.url,{
-            method:
-        })
-    }
-} 
+}
+
+const AeroServ=new AeronaveService()
+export default AeroServ
