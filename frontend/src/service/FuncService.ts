@@ -3,7 +3,7 @@ import Service from "./Service";
 
 class FuncionarioService extends Service<createFuncionario,updateFuncionario,string>{
     constructor(){
-        super("http://localhost:3000/peca")
+        super("http://localhost:3000/funcionarios")
     }
 }
 

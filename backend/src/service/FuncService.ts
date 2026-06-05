@@ -1,4 +1,5 @@
-import { createFuncionario, updateFuncionario } from "../dto/FuncionaroDTO";
+
+import { createFuncionario, loginFuncionario, updateFuncionario } from "../dto/FuncionaroDTO";
 import FuncRepos from "../repository/FuncRepo";
 
 export default class FuncService{
@@ -16,5 +17,8 @@ export default class FuncService{
 
     public get(){
         return this.funcRep.get()
+    }
+    public login(login:string){
+        return this.funcRep.login(login)
     }
 }

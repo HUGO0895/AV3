@@ -1,15 +1,17 @@
 import { prisma } from "../config/prisma";
 import { createFuncionario, updateFuncionario } from "../dto/FuncionaroDTO";
+import bcrypt from "bcryptjs";
 
 export  default class FuncRepos{
       public async create(func:createFuncionario){
+          const hash = await bcrypt.hash(func.senha, 10);
           const Func= await prisma.funcionario.create({
             data:{
                 nome:func.nome,
                 telefone:func.telefone,
                 endereco:func.endereco,
                 nivelPermissao:func.nivelPermissao,
-                senha:func.senha,
+                senha:hash,
                 usuario:func.usuario
             },
             select:{
@@ -74,4 +76,11 @@ export  default class FuncRepos{
         })
         return Funcs
     }
+
+    public async login(usuario:string){
+        return await prisma.funcionario.findUnique({
+            where:{usuario}
+        })
+    }
+    
 }

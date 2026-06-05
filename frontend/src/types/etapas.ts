@@ -1,4 +1,3 @@
-import { Status } from "../../prisma/generated/prisma/enums"
 
 export interface createEtapa{
      nome:string,
@@ -10,7 +9,7 @@ export interface createEtapa{
 export interface updateEtapa{
     nome:string
     prazo:string,
-    status:Status
+    status:"PENDENTE" | "ANDAMENTO" | "CONCLUIDA"
     aeronave_id:string
     funcionarios?:Array<number>
 }
@@ -18,7 +17,7 @@ export interface updateEtapa{
 export interface responseEtapa{
     nome:string,
     prazo:string,
-    status:Status,
+    status:"PENDENTE" | "ANDAMENTO" | "CONCLUIDA",
     aeronave_id:string
     funcionarios?:Array<string>
 }

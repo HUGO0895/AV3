@@ -1,12 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../index.css';
 import FormDeletarAero from './deletarAero';
 import FormEditarAero from './formUpdate';
 import FormCadastroAero from './formCdastro';
+import AeroServ from '../../service/AeronaveService';
+import { ResponseAero } from '../../types/aeronave';
 
+function  VerAeronaves() {
+    const [aeronaves,setAero]=useState<ResponseAero[]>([])
+   const [erro, setErro] = useState<string | null>(null)
+     const buscar = async () => {  
+    try {
+        const resposta = await AeroServ.get()
+        const dados = resposta.resposta
+        setAero(Array.isArray(dados) ? dados : [])
+    } catch {
+        setAero([])
+    }
+}
+   useEffect(() => {
+  buscar() 
 
-function VerAeronaves() {
-  
+  const intervalo = setInterval(() => {
+    buscar()
+  }, 10000) 
+
+  return () => clearInterval(intervalo) 
+}, [])
     const [busca, setBusca] = useState('');
     const [filtroTipo, setFiltroTipo] = useState('TODOS');
 
@@ -15,10 +35,10 @@ function VerAeronaves() {
     const [ModalDelete, setModalDelete] = useState(false);
     const [idAero, setIdAero] = useState('');
     const [ModalEditar, setModalEditar] = useState(false);
-    const [AeroParaEditar, setAeroParaEditar] = useState({ id: '', modelo: '', tipo: '', alcance: 0, capacidade: 0 });
+    const [AeroParaEditar, setAeroParaEditar] = useState<ResponseAero | undefined>(undefined);
 
     
-    const aeronavesFiltradas = aeronaves.filter((aero) => {
+    const aeronavesFiltradas = aeronaves.filter((aero:ResponseAero) => {
         const bateNome = aero.modelo.toLowerCase().includes(busca.toLowerCase());
         const bateTipo = filtroTipo === 'TODOS' || aero.tipo === filtroTipo;
         return bateNome && bateTipo;
@@ -29,7 +49,12 @@ function VerAeronaves() {
             
             {/* --- CABEÇALHO --- */}
             <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4'>   
-                <h1 className='font-bold text-2xl text-[#123354]'>Gestão de Frota</h1> 
+               <h1 className='font-bold text-2xl text-[#123354]'>Gestão de Frota</h1>
+{erro && (
+  <span className="text-red-500 text-sm font-semibold bg-red-50 px-3 py-1 rounded-xl">
+    {erro}
+  </span>
+)}
                 <button 
                     type='button' 
                     className='bg-[#123354] text-white px-8 py-3 rounded-2xl font-semibold hover:bg-[#1a4a7a] transition-all active:scale-95 shadow-lg shadow-blue-900/10' 
@@ -77,7 +102,7 @@ function VerAeronaves() {
             {/* --- LISTAGEM DE CARDS --- */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
                 {aeronavesFiltradas.length > 0 ? (
-                    aeronavesFiltradas.map((aero, index) => (
+                    aeronavesFiltradas.map((aero:ResponseAero, index) => (
                         <div key={index} className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col gap-4 border-t-4 border-t-[#123354]">
                             
                             <div className="flex justify-between items-start">
@@ -127,9 +152,11 @@ function VerAeronaves() {
             </div>
 
             {/* --- MODAIS --- */}
-            <FormCadastroAero aberto={ModalCadastro} fechado={() => setModalCadastro(false)} />
-            <FormDeletarAero aberto={ModalDelete} nomeAero={idAero} fechado={() => setModalDelete(false)} />
-            <FormEditarAero aberto={ModalEditar} aeronave={AeroParaEditar} fechado={() => setModalEditar(false)} />
+            <FormCadastroAero aberto={ModalCadastro} fechado={() => setModalCadastro(false)} onSalvar={buscar} onErro={setErro} />
+            <FormDeletarAero aberto={ModalDelete} nomeAero={idAero} fechado={() => setModalDelete(false) } onSalvar={buscar} onErro={setErro} />
+            {ModalEditar && AeroParaEditar && (
+  <FormEditarAero aberto={ModalEditar} aeronave={AeroParaEditar} fechado={() => setModalEditar(false)} onSalvar={buscar} onErro={setErro} />
+)}
         </div>
     );
 }

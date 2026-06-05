@@ -11,5 +11,5 @@ model Etapas{
      aeronave_id String
      @@id([nome,aeronave_id])
      funcionarios FuncEtapa[]
-     aeronave Aeronaves @relation(fields: [aeronave_id],references: [id])
+     aeronave Aeronaves @relation(fields: [aeronave_id],references: [id],onDelete: Cascade)
 }

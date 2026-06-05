@@ -1,9 +1,8 @@
-import { TipoPecas, TipoStatus } from "../../prisma/generated/prisma/enums";
 
 export interface createPeca{
     aeronave_id:string,
     nome:string,
-    tipo:TipoPecas,
+    tipo:"NACIONAL" | "IMPORTADA",
     fornecedor:string,
 
 }
@@ -11,15 +10,15 @@ export interface createPeca{
 export interface updatePeca{
     aeronave_id:string,
     nome:string,
-    tipo?:TipoPecas,
+    tipo?:"NACIONAL" | "IMPORTADA",
     fornecedor?:string,
-    status?:TipoStatus
+    status?:"EM_PRODUCAO" | "EM_TRANSPORTE" | "PRONTA"
 }
 
 export interface ResponsePeca{
      aeronave_id:string,
     nome:string,
-    tipo:TipoPecas,
+    tipo:"NACIONAL" | "IMPORTADA",
     fornecedor:string,
-    status:TipoStatus
+    status:"EM_PRODUCAO" | "EM_TRANSPORTE" | "PRONTA"
 }

@@ -1,10 +1,13 @@
 import '../../index.css'
+import AeroServ from '../../service/AeronaveService';
 interface props{
   aberto:boolean;
   fechado:()=>void
   nomeAero:string
+  onSalvar:()=>void
+    onErro: (msg: string | null) => void
 }
-function FormDeletarAero({aberto,fechado,nomeAero}:props) {
+function FormDeletarAero({aberto,fechado,nomeAero,onSalvar,onErro}:props) {
     if(!aberto)return null
     return (
         <div className="max-w-xl mx-auto m-5  p-8 bg-white border border-gray-200 rounded-3xl shadow-sm fixed inset-70 justify-center flex items-center z-50 top-70">
@@ -28,7 +31,22 @@ function FormDeletarAero({aberto,fechado,nomeAero}:props) {
 
                 <div className="lg:col-span-3 flex justify-start">
                     <button
-                        type="submit"
+                      onClick={async ()=>{
+                        try{
+                           const resposta= await AeroServ.delete(nomeAero);
+                          if (resposta.status=="error"){
+              onErro(resposta.resposta)
+            }else{
+              onErro(null)
+            }
+                            onSalvar();
+                            fechado()
+                        }catch(erro){
+
+                              onErro("Erro de conexão com o servidor")
+                            }
+                        }}
+                        type="button"
                         className="bg-red-600 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-red-700 transition-all shadow-sm"
                     >
                         Excluir Aeronave

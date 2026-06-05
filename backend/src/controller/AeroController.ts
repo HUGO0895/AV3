@@ -9,6 +9,7 @@ export default class AeroController{
 
     static async create(req:Request,res:Response){
        try{
+         console.log(req.body)
         const aeronave:createAero=req.body
         const resposta= await AeroController.AeroServ.create(aeronave)
         return res.status(200).json({

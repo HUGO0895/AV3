@@ -27,3 +27,8 @@ export interface ResponseFuncionario{
        nivelPermissao:Permissao
 
 }
+
+export interface loginFuncionario{
+    usuario:string,
+    senha:string
+}

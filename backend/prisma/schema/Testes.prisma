@@ -13,5 +13,5 @@ model Testes{
     resultado Resultado
     aeronave_id String
     @@id([tipo,aeronave_id])
-    aeronaves Aeronaves @relation(fields: [aeronave_id],references: [id])
+    aeronaves Aeronaves @relation(fields: [aeronave_id],references: [id],onDelete: Cascade)
 }

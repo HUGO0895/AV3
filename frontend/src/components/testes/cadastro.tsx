@@ -1,6 +1,19 @@
+import { useState } from 'react';
 import '../../index.css';
+import TesteServ from '../../service/TesteService';
+import { createTest } from '../../types/teste';
 
-function FormCadastroTeste({ aberto, fechado }: { aberto: boolean, fechado: () => void }) {
+interface Props {
+    aberto: boolean;
+    fechado: () => void;
+    aeronave_id: string;
+    onSalvar: () => void;
+    onErro: (msg: string | null) => void;
+}
+
+function FormCadastroTeste({ aberto, fechado, aeronave_id, onSalvar, onErro }: Props) {
+    const [tipo, setTipo] = useState<createTest['tipo']>('ELETRICO')
+
     if (!aberto) return null;
 
     return (
@@ -8,24 +21,37 @@ function FormCadastroTeste({ aberto, fechado }: { aberto: boolean, fechado: () =
             <div className="max-w-md w-full bg-white rounded-3xl p-8 shadow-2xl relative">
                 <button onClick={fechado} className="absolute top-5 right-6 text-gray-400 hover:text-red-500 text-2xl font-bold">✕</button>
                 <h2 className="text-2xl font-bold text-[#123354] mb-6">Novo Registro de Teste</h2>
-                <form className="flex flex-col gap-5">
+                <div className="flex flex-col gap-5">
                     <div>
                         <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Tipo de Teste</label>
-                        <select className="w-full mt-1 p-3 bg-gray-50 border border-gray-200 rounded-xl font-semibold text-[#123354]">
-                            <option value="ELÉTRICO">ELÉTRICO</option>
-                            <option value="HIDRÁULICO">HIDRÁULICO</option>
-                            <option value="AERODINÂMICO">AERODINÂMICO</option>
+                        <select
+                            className="w-full mt-1 p-3 bg-gray-50 border border-gray-200 rounded-xl font-semibold text-[#123354]"
+                            value={tipo}
+                            onChange={(e) => setTipo(e.target.value as createTest['tipo'])}
+                        >
+                            <option value="ELETRICO">ELÉTRICO</option>
+                            <option value="HIDRAULICO">HIDRÁULICO</option>
+                            <option value="AERODINAMICO">AERODINÂMICO</option>
                         </select>
                     </div>
-                    <div>
-                        <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Resultado</label>
-                        <div className="flex gap-2 mt-1">
-                            <button type="button" className="flex-1 py-3 bg-green-50 border border-green-200 text-green-700 rounded-xl font-bold">APROVADO</button>
-                            <button type="button" className="flex-1 py-3 bg-red-50 border border-red-200 text-red-700 rounded-xl font-bold">REPROVADO</button>
-                        </div>
-                    </div>
-                    <button type="submit" className="bg-[#123354] text-white py-4 rounded-2xl font-bold mt-4">Salvar Relatório</button>
-                </form>
+                    <button
+                        type="button"
+                        onClick={async () => {
+                            const resposta = await TesteServ.create({ tipo, aeronave_id })
+                            if (resposta.status !== 'sucess') {
+                                onErro(resposta.resposta)
+                                fechado()
+                            } else {
+                                onErro(null)
+                                onSalvar()
+                                fechado()
+                            }
+                        }}
+                        className="bg-[#123354] text-white py-4 rounded-2xl font-bold mt-4"
+                    >
+                        Salvar Relatório
+                    </button>
+                </div>
             </div>
         </div>
     );
