@@ -1,3 +1,122 @@
+# Como Rodar o Projeto — Aerocode
+
+## Pré-requisitos
+
+Certifique-se de ter instalado:
+
+- [Node.js](https://nodejs.org/) v18 ou superior
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [MySQL](https://www.mysql.com/) v8 ou superior
+
+---
+
+## Backend
+
+### 1. Instalar dependências
+
+```bash
+cd backend
+npm install
+```
+
+### 2. Configurar variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do backend:
+
+```env
+DATABASE_URL="mysql://usuario:senha@localhost:3306/aerocode"
+JWT_SECRET="sua_chave_secreta_aqui"
+```
+
+> Substitua `usuario`, `senha` e `aerocode` pelos dados do seu banco MySQL.
+
+### 3. Rodar as migrations do Prisma
+
+```bash
+npx prisma migrate dev
+```
+
+Isso cria todas as tabelas no banco de dados.
+
+### 4. Gerar o client do Prisma
+
+```bash
+npx prisma generate
+```
+
+### 5. Iniciar o servidor
+
+```bash
+npx ts-node server.ts
+```
+
+Ou, se houver script no `package.json`:
+
+```bash
+npm run dev
+```
+
+O servidor sobe em **`http://localhost:3000`**.
+
+Na primeira execução, o seed é rodado automaticamente e cria os três usuários padrão:
+
+| Usuário | Senha    | Permissão     |
+|---------|----------|---------------|
+| admin   | admin123 | ADMINISTRADOR |
+| eng     | eng123   | ENGENHEIRO    |
+| op      | op123    | OPERADOR      |
+
+---
+
+## Frontend
+
+### 1. Instalar dependências
+
+```bash
+cd frontend
+npm install
+```
+
+### 2. Iniciar a aplicação
+
+```bash
+npm run dev
+```
+
+A aplicação sobe em **`http://localhost:5173`**.
+
+> Certifique-se de que o backend já está rodando antes de abrir o frontend, caso contrário as requisições vão falhar.
+
+---
+
+## Rodando os dois juntos
+
+Abra **dois terminais** e execute:
+
+**Terminal 1 — Backend:**
+```bash
+cd backend
+npm run dev
+```
+
+**Terminal 2 — Frontend:**
+```bash
+cd frontend
+npm run dev
+```
+
+Acesse **`http://localhost:5173`** no navegador e faça login com um dos usuários do seed.
+
+---
+
+## Comandos Prisma úteis
+
+| Comando                        | O que faz                                          |
+|--------------------------------|----------------------------------------------------|
+| `npx prisma migrate dev`       | Cria e aplica migrations no banco                  |
+| `npx prisma generate`          | Regenera o client após mudanças no schema          |
+| `npx prisma studio`            | Abre interface visual para explorar o banco        |
+| `npx prisma migrate reset`     | Reseta o banco e reaaplica todas as migrations     |
 # Documentação do Back-End — AEROCODE
 
 ## Visão Geral
