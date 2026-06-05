@@ -10,7 +10,7 @@ app.use(cors({
 app.use(express.json());
 app.use(rotas)
 const Port=3000
-
+//Functions
 async function seed(){
     const usuarios = [
         { nome:'Admin', telefone:'11999990001', endereco:'Rua A, 1', usuario:'admin', senha:'admin123', nivelPermissao:'ADMINISTRADOR' },
